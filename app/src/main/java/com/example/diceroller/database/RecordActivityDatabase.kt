@@ -85,7 +85,7 @@ abstract class RecordActivityDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                             context.applicationContext,
                             RecordActivityDatabase::class.java,
-                            "sleep_history_database"
+                            "record_activity_database"
                     )
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this lesson. You can learn more about

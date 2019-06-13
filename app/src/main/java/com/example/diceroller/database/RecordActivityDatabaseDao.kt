@@ -29,23 +29,23 @@ import androidx.room.Update
 interface RecordActivityDatabaseDao {
 
     @Insert
-    fun insert(night: RecordActivity)
+    fun insert(record: RecordActivity)
 
     /**
      * When updating a row with a value already set in a column,
      * replaces the old value with the new one.
      *
-     * @param night new value to write
+     * @param record new value to write
      */
     @Update
-    fun update(night: RecordActivity)
+    fun update(record: RecordActivity)
 
     /**
      * Selects and returns the row that matches the supplied start time, which is our key.
      *
      * @param key startTimeMilli to match
      */
-    @Query("SELECT * from daily_sleep_quality_table WHERE nightId = :key")
+    @Query("SELECT * from record_table WHERE recordId = :key")
     fun get(key: Long): RecordActivity?
 
     /**
@@ -53,7 +53,7 @@ interface RecordActivityDatabaseDao {
      *
      * This does not delete the table, only its contents.
      */
-    @Query("DELETE FROM daily_sleep_quality_table")
+    @Query("DELETE FROM record_table")
     fun clear()
 
     /**
@@ -61,14 +61,14 @@ interface RecordActivityDatabaseDao {
      *
      * sorted by start time in descending order.
      */
-    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC")
-    fun getAllNights(): LiveData<List<RecordActivity>>
+    @Query("SELECT * FROM record_table ORDER BY recordId DESC")
+    fun getAllRecords(): LiveData<List<RecordActivity>>
 
     /**
      * Selects and returns the latest night.
      */
-    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC LIMIT 1")
-    fun getTonight(): RecordActivity?
+    @Query("SELECT * FROM record_table ORDER BY recordId DESC LIMIT 1")
+    fun getLastRecord(): RecordActivity?
 
 }
 
